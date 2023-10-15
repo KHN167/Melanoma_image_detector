@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Result</title>
+    <link rel="stylesheet" href="static/css/result.css">
 </head>
 <body>
-    <h1>Result</h1>
-    <p>Predicted Class: {{ predicted_class }}</p>
-    <p>Score: {{ score|floatformat:10 }}</p>
-    
-    <!-- Add a button that links back to the index page -->
-    <a href="{% url 'index' %}"><button>Go Back</button></a>
+    <div class="card">
+        <h1>Result</h1>
+        <p>Predicted Class: {{ predicted_class }}</p>
+        <p>Score: {{ score|floatformat:10 }}</p>
+        
+        <!-- Add a button that links back to the index page -->
+        <div class="button-container">
+            <a href="{% url 'index' %}"><button>Go Back</button></a>
+        </div>
+    </div>
 </body>
+</html>
 </html>

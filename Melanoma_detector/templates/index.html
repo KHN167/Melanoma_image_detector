@@ -5,59 +5,170 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Django Website</title>
     <link rel="stylesheet" href="static/css/styles.css">
+    <script type="text/javascript" src="static/js/index.js"></script>
+    <style> 
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow-y: scroll;
+
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .banner {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            text-align: center;
+        }
+
+        #main {
+            overflow: auto;
+            padding-bottom: 100px;
+        }
+
+
+        .footer {
+            background-color: #333; /* Replace with your desired color code */
+            color: #fff; /* Set text color to make it readable */
+            text-align: center; /* Center align the text */
+            padding: 10px; /* Add some padding to the content inside the footer */
+        }
+        .footer a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .card-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .card {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin: 10px;
+            padding: 10px;
+            height: 200px;
+            width: calc(20%); /* 25% minus margin */
+            text-align: center;
+        }
+        .card img {
+            width: 50%; /* Adjust the width as needed */
+            display: block;
+            margin: auto;
+            border-radius: 50%;
+        }
+        .info {
+            text-align: center;
+            margin: 0 auto;
+            
+            max-width: 800px; /* Adjust the maximum width as needed */
+        }
+
+        .upload {
+            text-align: center; /* Center text */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* This makes sure the div takes up the full height of the viewport */
+        }
+
+        .preview {
+            margin-bottom: 20px;
+        }
+                
+
+
+    </style>
 </head>
 <body>
-    <div class="banner">
-        <h1>Welcome to My Django Website</h1>
-        <p>Discover amazing content and more...</p>
-    </div>
-    <!-- The rest of your content goes here -->
+    <div id="main">
 
-    <div class="card-container">
-        <div class="card">
-            <img src="path_to_image1.jpg" alt="Image 1">
-            <h3>Higher Survival Rates</h3>
-            <p>Detecting melanoma in its early stages significantly increases the chances 
-                of successful treatment and long-term survival. Early intervention allows for less aggressive treatments and better outcomes.</p>
-        </div>
-
-        <div class="card">
-            <img src="drag_pan_FILL0_wght400_GRAD0_opsz24.png" alt="Image 2">
-            <h3>Minimized Spread and Complications</h3>
-            <p>When melanoma is caught early, it's more likely to be localized, meaning it has not 
-                yet spread to other parts of the body. This reduces the risk of complications and the need for extensive surgeries or treatments.</p>
-        </div>
-
-        <div class="card">
-            <img src="path_to_image3.jpg" alt="Image 3">
-            <h3>Easier and Less Invasive Treatments</h3>
-            <p>Early-stage melanoma can often be treated with less invasive procedures, such as excision or Mohs surgery. 
-                These treatments are generally quicker, have fewer side effects, and result in smaller scars compared to more advanced stages.</p>
-        </div>
-
-        <div class="card">
-            <img src="path_to_image4.jpg" alt="Image 4">
-            <h3>Improved Quality of Life</h3>
-            <p>Early detection and treatment of melanoma lead to a better quality of life for patients. They 
-                experience less physical and emotional distress, and have a higher likelihood of resuming normal activities and routines after treatment.</p>
-        </div>
-    </div>
-
-    <div class="info">
-        <p>We employ cutting-edge AI image classification techniques to identify early signs of cancerous melanoma. Our trained AI models analyze skin images with precision, aiding in the prompt diagnosis and treatment of this critical condition.</p>
-    </div>
-
-    <h1>Upload an Image</h1>
-    <form method="post" action="{% url 'upload_image' %}" enctype="multipart/form-data">
-        {% csrf_token %}
-        <input type="file" name="image">
-        <button type="submit">Submit</button>
-    </form>
     
+        <div class="banner">
+            <h1>Welcome to My Django Website</h1>
+            <p>Discover amazing content and more...</p>
+        </div>
+        <!-- The rest of your content goes here -->
+
+        <div class="card-container">
+            <div class="card">
+                <img src="path_to_image1.jpg" alt="Image 1">
+                <h3>Higher Survival Rates</h3>
+                <p>Detecting melanoma in its early stages significantly increases the chances 
+                    of successful treatment and long-term survival. Early intervention allows for less aggressive treatments and better outcomes.</p>
+            </div>
+
+            <div class="card">
+                <img src="static\img\drag_pan_FILL0_wght400_GRAD0_opsz24.png" alt="Your Image" width="20px" height="50px">
+                <h3>Minimized Spread and Complications</h3>
+                <p>When melanoma is caught early, it's more likely to be localized, meaning it has not 
+                    yet spread to other parts of the body. This reduces the risk of complications and the need for extensive surgeries or treatments.</p>
+            </div>
+
+            <div class="card">
+                <img src="path_to_image3.jpg" alt="Image 3">
+                <h3>Easier and Less Invasive Treatments</h3>
+                <p>Early-stage melanoma can often be treated with less invasive procedures, such as excision or Mohs surgery. 
+                    These treatments are generally quicker, have fewer side effects, and result in smaller scars compared to more advanced stages.</p>
+            </div>
+
+            <div class="card">
+                <img src="path_to_image4.jpg" alt="Image 4">
+                <h3>Improved Quality of Life</h3>
+                <p>Early detection and treatment of melanoma lead to a better quality of life for patients. They 
+                    experience less physical and emotional distress, and have a higher likelihood of resuming normal activities and routines after treatment.</p>
+            </div>
+        </div>
+
+        <div class="info">
+            <p>We employ cutting-edge AI image classification techniques to identify early signs of cancerous melanoma. Our trained AI models analyze skin images with precision, aiding in the prompt diagnosis and treatment of this critical condition.</p>
+        </div>
 
 
-    <div class="footer">
-        <p>&copy; 2023 Kevin Nguyen. Find me on GitHub: <a href="https://github.com/KHN167">KHN167</a></p>
+        <div class="info">
+            <p>For the diagnosis to be accurate you should take a picture that looks similar to the picture shown below</p>
+            <img src="static\img\melanoma_9618.jpg" alt="Image 4">
+        </div>
+
+        <div class="info">
+            <h1>Upload an Image</h1>
+            <form method="post" action="{% url 'upload_image' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="file" name="image" onchange="PreviewImage();">
+            </form>
+            <div class="preview">
+                <h2>Preview:</h2>
+                <img id="uploadPreview" style="width: 100px; height: 100px;" />
+            </div>
+            
+            <!-- Add the submit button here -->
+            <button type="submit">Submit</button>
+        </div>
+
+
+
+
+        <div class="info">
+            <p>After submission of image you will be redirected to a result page to get a prediction from the AI model.</p>
+
+        </div>
+
+        <div class="footer">
+            <!-- Footer content goes here -->
+            <p>&copy; 2023 Your Website</p>
+        </div>
     </div>
+
+    
 </body>
 </html>

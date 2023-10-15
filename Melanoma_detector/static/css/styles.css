@@ -1,8 +1,11 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
     background-color: #f0f0f0;
     margin: 0;
     padding: 0;
+    height: 100%;
+    overflow-y: scroll;
+
 }
 
 h1 {
@@ -16,16 +19,19 @@ h1 {
     text-align: center;
 }
 
+#main {
+    overflow: auto;
+    padding-bottom: 100px;
+    height: 2000px;
+}
+
 
 .footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 10px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
+    background-color: #333; /* Replace with your desired color code */
+    color: #fff; /* Set text color to make it readable */
+    text-align: center; /* Center align the text */
+    padding: 10px; /* Add some padding to the content inside the footer */
+  }
 .footer a {
     color: #fff;
     text-decoration: none;
@@ -46,13 +52,27 @@ h1 {
     text-align: center;
 }
 .card img {
-    width: 100%;
+    width: 50%; /* Adjust the width as needed */
+    display: block;
+    margin: auto;
     border-radius: 50%;
 }
-
 .info {
     text-align: center;
     margin: 0 auto;
     
     max-width: 800px; /* Adjust the maximum width as needed */
+}
+
+.upload {
+    text-align: center; /* Center text */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* This makes sure the div takes up the full height of the viewport */
+}
+
+.preview {
+    margin-bottom: 20px;
 }
