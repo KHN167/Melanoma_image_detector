@@ -97,6 +97,21 @@
         #footertext{
             color: white;
         }
+        .image-container {
+        position: relative;
+        display: inline-block;
+    }
+
+        .close-button {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            color: red;
+            cursor: pointer;
+        }
 
 
     </style>
@@ -154,12 +169,13 @@
             <h1>Upload an Image</h1>
             <form method="post" action="{% url 'upload_image' %}" enctype="multipart/form-data">
                 {% csrf_token %}
-                <input type="file" name="image" onchange="PreviewImage();">
+                <input type="file" accept="image/*" onchange="loadFile(event)">
                 <button type="submit">Submit</button>
             </form>
-            <div class="preview">
-                <h2>Preview:</h2>
-                <img id="uploadPreview" style="width: 100px; height: 100px;" />
+
+            <div class="image-container">
+                <img id="output" style="width: 300px; height: 300px; border: none; outline: none;"/>
+                <button class="close-button" type="button" onclick="removeImage()">X</button>
             </div>
             
             <!-- Add the submit button here -->
@@ -178,6 +194,24 @@
             <p id="footertext">&copy; 2023 Your Website</p>
         </div>
     </div>
+
+    <script>
+        var loadFile = function(event) {
+          var output = document.getElementById('output');
+          output.src = URL.createObjectURL(event.target.files[0]);
+          output.onload = function() {
+            URL.revokeObjectURL(output.src) // free memory
+          }
+        };
+
+
+
+
+        function removeImage() {
+            document.getElementById('output').src = ''; // Set the image source to an empty string
+            document.querySelector('input[type="file"]').value = ''; // Reset the file input
+        }
+      </script>
 
     
 </body>
