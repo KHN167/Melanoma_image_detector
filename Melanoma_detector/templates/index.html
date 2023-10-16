@@ -27,6 +27,7 @@
             color: #fff;
             padding: 10px 20px;
             text-align: center;
+            height: 100px;
         }
 
         #main {
@@ -67,13 +68,17 @@
             display: block;
             margin: auto;
             width: 10%;
-            object-fit: cover; /* This will maintain the aspect ratio without stretching */
+             /* This will maintain the aspect ratio without stretching */
         }
         .info {
             text-align: center;
             margin: 0 auto;
             
             max-width: 800px; /* Adjust the maximum width as needed */
+        }
+
+        #example{
+            border-radius: 8px;
         }
 
         .upload {
@@ -89,6 +94,9 @@
             margin-bottom: 20px;
         }
                 
+        #footertext{
+            color: white;
+        }
 
 
     </style>
@@ -98,8 +106,7 @@
 
     
         <div class="banner">
-            <h1>Welcome to My Django Website</h1>
-            <p>Discover amazing content and more...</p>
+            
         </div>
         <!-- The rest of your content goes here -->
 
@@ -140,7 +147,7 @@
 
         <div class="info">
             <p>For the diagnosis to be accurate you should take a picture that looks similar to the picture shown below</p>
-            <img src="static\img\melanoma_9618.jpg" alt="Image 4">
+            <img src="static\img\melanoma_9618.jpg" alt="Image 4" id="example">
         </div>
 
         <div class="info">
@@ -148,6 +155,7 @@
             <form method="post" action="{% url 'upload_image' %}" enctype="multipart/form-data">
                 {% csrf_token %}
                 <input type="file" name="image" onchange="PreviewImage();">
+                <button type="submit">Submit</button>
             </form>
             <div class="preview">
                 <h2>Preview:</h2>
@@ -155,7 +163,6 @@
             </div>
             
             <!-- Add the submit button here -->
-            <button type="submit">Submit</button>
         </div>
 
 
@@ -168,7 +175,7 @@
 
         <div class="footer">
             <!-- Footer content goes here -->
-            <p>&copy; 2023 Your Website</p>
+            <p id="footertext">&copy; 2023 Your Website</p>
         </div>
     </div>
 

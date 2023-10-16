@@ -16,16 +16,19 @@ def index(request):
 
 def is_valid_image(uploaded_image):
     try:
-        img = Image.open(uploaded_image)
-        img.verify()  # Verifies the image data
-        return True
-    except (IOError, SyntaxError) as e:
+        # Attempt to open the image
+        with Image.open(uploaded_image) as img:
+            return True
+    except:
         return False
 
 def upload_image(request):
     if request.method == 'POST' and request.FILES['image']:
         uploaded_image = request.FILES['image']
         # Process the uploaded image here
+
+        if not is_valid_image(uploaded_image):
+            return HttpResponse('Invalid image file. Please upload a valid image.')
 
         model_path = os.path.join(settings.BASE_DIR, 'benignmalignant.h5')
         model = load_model(model_path)
@@ -34,22 +37,18 @@ def upload_image(request):
         
 
 
-        if is_valid_image(img):
-            with Image.open(uploaded_image) as img:
-                img1 = np.array(img)
+        with Image.open(uploaded_image) as img:
+            img1 = np.array(img)
 
-                resize = cv2.resize(img1, (256, 256))
-                resize = tf.image.resize(resize, (256, 256))
+            resize = cv2.resize(img1, (256, 256))
+            resize = tf.image.resize(resize, (256, 256))
 
-                yhat = model.predict(np.expand_dims(resize/255, 0))
+            yhat = model.predict(np.expand_dims(resize/255, 0))
 
-                if yhat > 0.5:
-                    predicted_class = 'malignant'
-                else:
-                    predicted_class = 'benign'
-
-        else:
-            return HttpResponse('invalid image file. please upload a valid image.')
+            if yhat > 0.5:
+                predicted_class = 'malignant'
+            else:
+                predicted_class = 'benign'
 
 
 
