@@ -27,8 +27,6 @@ def upload_image(request):
         uploaded_image = request.FILES['image']
         # Process the uploaded image here
 
-        if not is_valid_image(uploaded_image):
-            return HttpResponse('Invalid image file. Please upload a valid image.')
 
         model_path = os.path.join(settings.BASE_DIR, 'benignmalignant.h5')
         model = load_model(model_path)
@@ -50,16 +48,6 @@ def upload_image(request):
             else:
                 predicted_class = 'benign'
 
-
-
-
-
-
-        # Save the image to a directory
-        image_path = os.path.join(settings.MEDIA_ROOT, 'uploaded_images', uploaded_image.name)
-        with open(image_path, 'wb') as destination:
-            for chunk in uploaded_image.chunks():
-                destination.write(chunk)
 
         return render(request, 'results.html', {'predicted_class': predicted_class, 'score': yhat[0][0]})
 
