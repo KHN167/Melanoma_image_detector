@@ -118,6 +118,66 @@
             display: none;
         }
 
+        button {
+            margin-right: 10px; /* Adjust the value as needed */
+        }
+
+        .upload {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center; /* Optional: Center-align text */
+    }
+
+            input[type="file"] {
+            display: none; /* Hide the default file input button */
+        }
+
+        /* This styles a custom button that will be displayed instead */
+        .custom-file-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            margin-right: 20px;
+            width: 100px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Style the custom button to look like a button */
+        .custom-file-button:hover {
+            background-color: #45a049;
+        }
+
+        /* Style the custom button to look like a button when clicked */
+        .custom-file-button:active {
+            background-color: #3e8e41;
+        }
+
+        /* Style the submit button */
+        #submit-button {
+            background-color: #4CAF50; /* Green */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            width: 130px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-left: 20px;
+        }
+
+        /* On hover, darken the button */
+        #submit-button:hover {
+            background-color: #45a049;
+        }
+
+        /* When clicked, make it even darker */
+        #submit-button:active {
+            background-color: #3e8e41;
+        }
+
 
     </style>
 </head>
@@ -174,14 +234,18 @@
             <h1>Upload an Image</h1>
             <form method="post" action="{% url 'upload_image' %}" enctype="multipart/form-data">
                 {% csrf_token %}
-                <input type="file" name="image" accept="image/*" onchange="loadFile(event)">
-                <button type="submit">Submit</button>
+                <label class="custom-file-button">
+                    Choose File
+                    <input type="file" name="image" accept="image/*" onchange="loadFile(event)">
+                </label>
+                <button type="submit" id="submit-button" disabled>Submit</button>
             </form>
-
             <div class="image-container">
                 <img id="output" style="width: 300px; height: 300px; border: none; outline: none;"/>
-                <button class="close-button hidden" type="button" onclick="removeImage()">X</button>
+                <button class="close-button" type="button" onclick="removeImage()">X</button>
             </div>
+            
+            
             
             <!-- Add the submit button here -->
         </div>
@@ -201,6 +265,9 @@
     </div>
 
     <script>
+        submitButton();
+
+
 
         
         var loadFile = function(event) {
@@ -230,6 +297,17 @@
             closeButton.classList.add('hidden');
 
 
+        }
+
+
+        function submitButton(){
+            document.querySelector('input[type="file"]').addEventListener('change', function() {
+            // Get the submit button
+            var submitButton = document.querySelector('button[type="submit"]');
+            
+            // Enable or disable the submit button based on whether a file is selected
+            submitButton.disabled = this.files.length === 0;
+        });
         }
       </script>
 
