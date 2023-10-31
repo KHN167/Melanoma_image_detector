@@ -36,19 +36,22 @@ def upload_image(request):
 
 
         with Image.open(uploaded_image) as img:
-            img1 = np.array(img)
+            img = img.convert('RGB')
+            img_array = np.array(img)
 
-            resize = cv2.resize(img1, (256, 256))
-            resize = tf.image.resize(resize, (256, 256))
+            # Resize the image
+            img_array = cv2.resize(img_array, (256, 256))
+            img_array = img_array / 255.0  # Normalize the image
 
-            yhat = model.predict(np.expand_dims(resize/255, 0))
+            # Make predictions
+            predictions = model.predict(np.expand_dims(img_array, axis=0))
 
-            if yhat > 0.5:
+            # Process the predictions
+            if predictions > 0.5:
                 predicted_class = 'malignant'
             else:
                 predicted_class = 'benign'
 
-
-        return render(request, 'results.html', {'predicted_class': predicted_class, 'score': yhat[0][0]})
+        return render(request, 'results.html', {'predicted_class': predicted_class, 'score': predictions[0][0]})
 
     return render(request, 'index.html')

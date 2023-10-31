@@ -138,7 +138,6 @@
             background-color: #4CAF50;
             color: white;
             padding: 10px 20px;
-            margin-right: 20px;
             width: 100px;
             border: none;
             border-radius: 5px;
@@ -163,6 +162,7 @@
             border: none;
             width: 130px;
             border-radius: 5px;
+            padding-left: 20px;
             cursor: pointer;
             font-size: 16px;
             margin-left: 20px;
@@ -242,7 +242,6 @@
             </form>
             <div class="image-container">
                 <img id="output" style="width: 300px; height: 300px; border: none; outline: none;"/>
-                <button class="close-button" type="button" onclick="removeImage()">X</button>
             </div>
             
             
@@ -279,7 +278,6 @@
 
 
             var closeButton = document.querySelector('.close-button');
-            closeButton.classList.remove('hidden');
         };
 
 
@@ -294,8 +292,7 @@
 
             // Hide the close button
             var closeButton = document.querySelector('.close-button');
-            closeButton.classList.add('hidden');
-
+            closeButton.setAttribute('hidden', 'true');
 
         }
 
