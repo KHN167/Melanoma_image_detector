@@ -49,9 +49,11 @@ def upload_image(request):
             # Process the predictions
             if predictions > 0.5:
                 predicted_class = 'malignant'
+                score = predictions[0][0] * 100
             else:
                 predicted_class = 'benign'
+                score = 100 - predictions[0][0] 
 
-        return render(request, 'results.html', {'predicted_class': predicted_class, 'score': predictions[0][0]})
+        return render(request, 'results.html', {'predicted_class': predicted_class, 'score': score})
 
     return render(request, 'index.html')
